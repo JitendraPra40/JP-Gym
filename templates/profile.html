@@ -1,0 +1,146 @@
+{% extends 'base.html' %} {% block title %} Profile {% endblock title %}
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+    
+    h6 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.875rem;
+    }
+
+    .card-body p {
+        font-size: 0.875rem !important;
+      }
+
+  </style>
+<h1>Enrollment Details</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      
+      {% comment %} Profile code {% endcomment %}
+     {% for post in posts %}
+      
+      
+
+     
+        <!-- Member Details Card -->
+        <div class="card  shadow-lg">
+          <div class="card-header bg-warning text-center text-dark">
+            <h3 class="mb-0">Member Details</h3>
+          </div>
+          <div class="card-body bg-dark p-4">
+            <div class="row gy-4">
+              <!-- Name -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-person-circle fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Name:</h6>
+                    <p class="mb-0">{{ post.FullName }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Email -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-envelope fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Email:</h6>
+                    <p class="mb-0">{{ post.Email }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Gender -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-gender-ambiguous fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Gender:</h6>
+                    <p class="mb-0">{{ post.Gender }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Phone Number -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-telephone fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Phone Number:</h6>
+                    <p class="mb-0">{{ post.PhoneNumber }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Date of Birth -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-calendar-date fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Date of Birth:</h6>
+                    <p class="mb-0">{{ post.DOB }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Membership Plan -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-card-checklist fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Membership Plan:</h6>
+                    <p class="mb-0">{{ post.SelectMembershipPlan }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Trainer -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-person-badge fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Trainer:</h6>
+                    <p class="mb-0">{{ post.SelectTrainer }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Payment Status -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-cash-coin fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Payment Status:</h6>
+                    <p class="mb-0">{{ post.paymentStatus }}</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Address -->
+              <div class="col-md-12">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-geo-alt fs-4 text-warning me-3"></i>
+                  <div>
+                    <h6 class="mb-0 fw-bold">Address:</h6>
+                    <p class="mb-0">{{ post.Address }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {% endfor %}
+    
+  </div>
+</div>
+
+
+
+
+{% endblock head %}

@@ -2,11 +2,21 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from authapp.models import Conatct
-
+from authapp.models import Contact, MembershipPlan, Enrollment,Trainer
 # Create your views here.
 def Home(request):
     return render(request, "index.html")
+
+def profile(request):
+    if not request.user.is_authenticated:
+        messages.warning(request,"Please Login and Try Again")
+        return redirect('/login')
+    user_phone=request.user
+    posts=Enrollment.objects.filter(PhoneNumber=user_phone)
+    # attendance=Attendance.objects.filter(phonenumber=user_phone)
+       
+    context={"posts":posts}
+    return render(request,"profile.html",context)
 
 
 def signup(request):
@@ -40,6 +50,7 @@ def signup(request):
 
 
 def handlelogin(request):
+       
     if request.method == "POST":
         username = request.POST.get("usernumber")
         pass1 = request.POST.get("pass1")
@@ -64,8 +75,36 @@ def contact(request):
         email = request.POST.get("email")
         number = request.POST.get("num")
         desc = request.POST.get("desc")
-        myquery = Conatct(name=name, email=email, phonenumber=number, description=desc)
+        myquery = Contact(name=name, email=email, phonenumber=number, description=desc)
         myquery.save()
         messages.info(request, "Thanks for contacting us. We will get back to you soon")
         return redirect("/contact")
     return render(request, "contact.html")
+
+def enrollment(request):
+    if not request.user.is_authenticated:
+        messages.warning(request,"Please Login and Try Again")
+        return redirect('/login')
+
+    Membership=MembershipPlan.objects.all()
+    SelectTrainer=Trainer.objects.all()
+    context={"Membership":Membership,"SelectTrainer":SelectTrainer}
+    if request.method=="POST":
+        FullName=request.POST.get('FullName')
+        email=request.POST.get('email')
+        gender=request.POST.get('gender')
+        PhoneNumber=request.POST.get('PhoneNumber')
+        DOB=request.POST.get('DOB')
+        member=request.POST.get('member')
+        trainer=request.POST.get('trainer')
+        reference=request.POST.get('reference')
+        address=request.POST.get('address')
+        query=Enrollment(FullName=FullName,Email=email,Gender=gender,PhoneNumber=PhoneNumber,DOB=DOB,SelectMembershipPlan=member,SelectTrainer=trainer,reference=reference,Address=address)
+        query.save()
+        messages.success(request,"Thanks For Enrollment")
+        return redirect('/join')
+
+
+
+    return render(request,"enroll.html",context)
+
