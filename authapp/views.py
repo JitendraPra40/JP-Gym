@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from authapp.models import Contact, MembershipPlan, Enrollment,Trainer
+from authapp.models import Contact, MembershipPlan, Enrollment,Trainer, Gallery
 # Create your views here.
 def Home(request):
     return render(request, "index.html")
@@ -108,3 +108,14 @@ def enrollment(request):
 
     return render(request,"enroll.html",context)
 
+def gallery(request):
+    posts=Gallery.objects.all()
+    context={"posts":posts}
+    return render(request, "gallery.html", context)
+
+def about(request):
+    return render(request, "about.html")
+
+
+def service(request):
+    return render(request, "service.html")

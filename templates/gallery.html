@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} Gallery {% endblock title %}
+{% block body %}
+
+<div class="container">
+  <center><h1>Gallery</h1></center>
+
+  <div class="row mt-2">
+    {% for post in posts %}
+    
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="{{post.img.url}}" alt="Card image cap" style="height: 300px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">{{post.title}}</h5>
+              <p class="card-text"><small class="text-muted">Last updated {{post.timeStamp}} ago</small></p>
+            </div>
+          </div>
+    </div>
+
+    {% endfor %}
+    
+    
+  </div>
+</div>
+
+{% endblock body %}
