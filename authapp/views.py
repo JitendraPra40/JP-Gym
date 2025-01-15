@@ -3,8 +3,8 @@ from django.utils.timezone import now
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from authapp.models import Contact, MembershipPlan, Enrollment,Trainer, Gallery, Workout, CustAttendance, GymImage, GymContact, Facility, GymAddress, Services
-
+from authapp.models import Contact, MembershipPlan, Enrollment,Trainer, Gallery, Workout, CustAttendance, GymImage, GymContact, Facility, GymAddress, Services, Review
+from django.http import HttpResponse
 from django.db import models
 # Create your views here.
 def Home(request):
@@ -153,3 +153,16 @@ def attendance(request):
         messages.success(request,"Successfully Applied!")
         return redirect('/attendance')
     return render(request, "attendance.html", context)
+
+def reviews(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        number = request.POST.get("phonenumber")
+        message = request.POST.get("message")
+        
+        # Save the feedback to the database
+        myquery = Review(name=name, email=email, phonenumber=number, description=message)
+        myquery.save()
+        # Redirect to the reviews page (or any other page to display the message)
+        return HttpResponse("Thanks for your valuable feedback!")
