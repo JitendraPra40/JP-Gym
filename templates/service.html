@@ -1,8 +1,104 @@
 {% extends 'base.html' %}
-{% block title %} Profile {% endblock title %}
+{% block title %} Services | JP Gym {% endblock title %}
+
 {% block head %}
+<style>
 
-<h1>Services</h1>
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid rgb(135, 255, 243); /* Arrow color */
+        transition: transform 0.3s ease, border-top-color 0.3s ease, box-shadow 0.3s ease;
+        animation: moveDown 2s infinite alternate, glow 1.5s ease-in-out infinite;
+    }
+    
+    /* Animation for moving the arrow down */
+    @keyframes moveDown {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(20px); /* Move arrow 20px downward */
+        }
+    }
+    
+    /* Animation for glowing effect */
+    @keyframes glow {
+        0% {
+            box-shadow: 0 0 5px #007bff;
+        }
+        100% {
+            box-shadow: 0 0 20pxrgb(233, 231, 231); /* Glow effect */
+        }
+    }
+    
+    /* Hover effect for additional interaction */
+    .arrow-down:hover {
+        transform: translateY(10px); /* Slight movement when hovered */
+        border-top-color:rgb(51, 255, 129); /* Change color on hover */
+        box-shadow: 0 0 15px rgb(51, 255, 129), 0 0 25px rgb(50, 246, 40); /* More intense glow on hover */
+    }
 
+</style>
+<!-- Hero Section -->
+<div class="text-white text-center py-5">
+    <h1>Our Services</h1>
+    <p>Explore the wide range of services we offer to help you achieve your fitness goals.</p>
+    <div class="arrow-down"></div>
+</div>
 
 {% endblock head %}
+
+{% block body %}
+
+<!-- Services Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">What We Offer</h2>
+    <div class="row gy-4">
+        <!-- Service 1 -->
+        {% for service in services %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-lg">
+                <img src="{{service.image.url}}" class="card-img-top" alt="{{service.title}}" style ="height: 300px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{service.title}}</h5>
+                    <p class="card-text">{{service.description}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+      
+       
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="bg-light py-5">
+    <div class="container text-center">
+        <h2>What Our Members Say</h2>
+        <div class="row gy-4 mt-4">
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p>"The personal training sessions have been a game changer for me. Highly recommend JP Gym!"</p>
+                    <footer class="blockquote-footer">John Doe</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p>"I love the group classes! They make staying fit fun and social."</p>
+                    <footer class="blockquote-footer">Jane Smith</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+    <p>© 2025 JP Gym. All Rights Reserved. | Designed with 💪 in Bangalore.</p>
+</footer>
+
+{% endblock body %}

@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
+from django.utils.timezone import now
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from authapp.models import Contact, MembershipPlan, Enrollment,Trainer, Gallery
+from authapp.models import Contact, MembershipPlan, Enrollment,Trainer, Gallery, Workout, CustAttendance, GymImage, GymContact, Facility, GymAddress, Services
+
+from django.db import models
 # Create your views here.
 def Home(request):
     return render(request, "index.html")
@@ -13,9 +16,10 @@ def profile(request):
         return redirect('/login')
     user_phone=request.user
     posts=Enrollment.objects.filter(PhoneNumber=user_phone)
-    # attendance=Attendance.objects.filter(phonenumber=user_phone)
+    attendance=CustAttendance.objects.filter(phonenumber=user_phone)
+    
        
-    context={"posts":posts}
+    context={"posts":posts,"attendance":attendance}
     return render(request,"profile.html",context)
 
 
@@ -113,9 +117,39 @@ def gallery(request):
     context={"posts":posts}
     return render(request, "gallery.html", context)
 
-def about(request):
-    return render(request, "about.html")
+def about_us(request):
+    gym_images = GymImage.objects.all()
+    contacts = GymContact.objects.all()
+    facilities = Facility.objects.all()
+    gym_address = GymAddress.objects.all()
+    return render(request, 'about.html', {
+        'gym_images': gym_images,
+        'contacts': contacts,
+        'facilities': facilities,
+        'gym_address': gym_address,
+    })
 
 
 def service(request):
-    return render(request, "service.html")
+    services = Services.objects.all()
+    return render(request, "service.html", {'services': services})
+
+def attendance(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, "Please Login and Try Again")
+        return redirect('/login')
+    SelectTrainer=Trainer.objects.all()
+    SelectWorkout=Workout.objects.all()
+    context={"SelectTrainer":SelectTrainer, "SelectWorkout":SelectWorkout}
+    if request.method=="POST":
+        UserNumber= request.POST.get("PhoneNumber")
+        Workouts=request.POST.get("workout")
+        LoginTime= request.POST.get("logintime")
+        LogoutTime= request.POST.get("logouttime")
+        TrainedBy= request.POST.get("trainer")
+        Status= request.POST.get("status")
+        query= CustAttendance(phonenumber=UserNumber, Workout= Workouts, LoginTime=LoginTime, LogoutTime=LogoutTime, TrainedBy=TrainedBy, Status=Status)
+        query.save()
+        messages.success(request,"Successfully Applied!")
+        return redirect('/attendance')
+    return render(request, "attendance.html", context)

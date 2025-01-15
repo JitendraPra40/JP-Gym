@@ -74,13 +74,17 @@
               ></a>
               <ul>
                 <li><a href="/join">Enroll</a></li>
-                <li><a href="/workouts">Workouts</a></li>
+                <li><a href="/attendance">Attendance</a></li>
                 <li><a href="/tracker">Tracker</a></li>
                 <li><a href="/profile">View Profile</a></li>
               </ul>
             </li>
-
-            <li><a href="/login">Signin</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="/logout">Logout</a></li>
+            {% else %}
+               <li><a href="/login">Login</a></li>
+            {% endif %}
+            
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -99,7 +103,7 @@
           data-aos="fade-up"
           data-aos-delay="100"
         >
-          <div class="col-xl-6 col-lg-8">
+          <div class="col-xl-12 col-lg-12 ">
             {% block head %} {% endblock head %}
           </div>
         </div>
@@ -107,7 +111,13 @@
     </section>
     <!-- /Hero Section -->
 
-    <main class="main">{% block body %}{% endblock body %}</main>
+    <main class="main">
+      
+      {% block body %}
+      
+      {% endblock body %}
+    
+    </main>
 
     {% comment %} <footer id="footer" class="footer dark-background">
       <div class="footer-top">

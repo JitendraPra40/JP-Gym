@@ -13,20 +13,16 @@
       }
 
   </style>
-<h1>Enrollment Details</h1>
+{% comment %} <h1>Enrollment Details</h1> {% endcomment %}
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      
+    <div class="col-md-6">
       {% comment %} Profile code {% endcomment %}
-     {% for post in posts %}
+      {% for post in posts %}
       
-      
-
-     
         <!-- Member Details Card -->
-        <div class="card  shadow-lg">
+        <div class="card shadow-lg mb-4">
           <div class="card-header bg-warning text-center text-dark">
             <h3 class="mb-0">Member Details</h3>
           </div>
@@ -119,7 +115,7 @@
                   </div>
                 </div>
               </div>
-      
+              
               <!-- Address -->
               <div class="col-md-12">
                 <div class="d-flex align-items-center">
@@ -133,12 +129,41 @@
             </div>
           </div>
         </div>
-      </div>
-      
       {% endfor %}
+    </div> 
     
+    <!-- Right Column (Additional Information) -->
+    <div class="col-md-6">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Login</th>
+            <th scope="col">Logout</th>
+            <th scope="col">Workout</th>
+            <th scope="col">Trained</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for attend in attendance %}
+          <tr>
+           
+            <th scope="row">1{{attend.Date}}</th>
+            <td>{{attend.LoginTime}}</td>
+            <td>{{attend.LogoutTime}}</td>
+            <td>{{attend.Workout}}</td>
+            <td>{{attend.TrainedBy}}</td>
+            <td>{{attend.Status}}</td>
+           
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
   </div>
 </div>
+
 
 
 

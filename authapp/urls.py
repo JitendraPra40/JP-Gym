@@ -10,7 +10,8 @@ urlpatterns = [
     path('join', views.enrollment, name='enrollment'),
     path('profile', views.profile, name='profile'),
     path('gallery', views.gallery, name='gallery'),
-    path('about', views.about, name='about'),
     path('services', views.service, name='service'),
-    
+    path('attendance', views.attendance, name='attendance'),
+    path('about', views.about_us, name='about_us'),
+    path('service', views.service, name='service')
 ]

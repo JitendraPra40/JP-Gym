@@ -1,9 +1,69 @@
 {% extends 'base.html' %}
 {% block title %} Gallery {% endblock title %}
+
+{% block head %}
+<center><h1>Gallery</h1></center>
+
+<style>
+
+  .arrow-down {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid rgb(135, 255, 243); /* Arrow color */
+      transition: transform 0.3s ease, border-top-color 0.3s ease, box-shadow 0.3s ease;
+      animation: moveDown 2s infinite alternate, glow 1.5s ease-in-out infinite;
+  }
+  
+  /* Animation for moving the arrow down */
+  @keyframes moveDown {
+      0% {
+          transform: translateY(0);
+      }
+      100% {
+          transform: translateY(20px); /* Move arrow 20px downward */
+      }
+  }
+  
+  /* Animation for glowing effect */
+  @keyframes glow {
+      0% {
+          box-shadow: 0 0 5px #007bff;
+      }
+      100% {
+          box-shadow: 0 0 20pxrgb(233, 231, 231); /* Glow effect */
+      }
+  }
+  
+  /* Hover effect for additional interaction */
+  .arrow-down:hover {
+      transform: translateY(10px); /* Slight movement when hovered */
+      border-top-color:rgb(51, 255, 129); /* Change color on hover */
+      box-shadow: 0 0 15px rgb(51, 255, 129), 0 0 25px rgb(50, 246, 40); /* More intense glow on hover */
+  }
+
+</style>
+
+
+<div class= "container">
+  <div class="row mt-2 d-flex justify-content-center algin-item-center">
+  <div class="col-md-6">
+    <p>
+      Our gallery showcases the heart of JP Gym – featuring high-quality fitness equipment, expert trainers, and a variety of fitness programs. Get inspired and motivated by what we offer.
+    </p>
+    <div class="arrow-down"></div>
+  </div>
+  </div>
+</div>
+
+
+{% endblock head %}
 {% block body %}
 
+
 <div class="container">
-  <center><h1>Gallery</h1></center>
+
 
   <div class="row mt-2">
     {% for post in posts %}

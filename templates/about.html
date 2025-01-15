@@ -1,9 +1,124 @@
 {% extends 'base.html' %}
-{% block title %} About us{% endblock title %}
+{% block title %}About Us{% endblock title %}
+
 {% block head %}
+<style>
 
-<h1>About us</h1>
+    .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid rgb(135, 255, 243); /* Arrow color */
+        transition: transform 0.3s ease, border-top-color 0.3s ease, box-shadow 0.3s ease;
+        animation: moveDown 2s infinite alternate, glow 1.5s ease-in-out infinite;
+    }
+    
+    /* Animation for moving the arrow down */
+    @keyframes moveDown {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(20px); /* Move arrow 20px downward */
+        }
+    }
+    
+    /* Animation for glowing effect */
+    @keyframes glow {
+        0% {
+            box-shadow: 0 0 5px #007bff;
+        }
+        100% {
+            box-shadow: 0 0 20pxrgb(233, 231, 231); /* Glow effect */
+        }
+    }
+    
+    /* Hover effect for additional interaction */
+    .arrow-down:hover {
+        transform: translateY(10px); /* Slight movement when hovered */
+        border-top-color:rgb(51, 255, 129); /* Change color on hover */
+        box-shadow: 0 0 15px rgb(51, 255, 129), 0 0 25px rgb(50, 246, 40); /* More intense glow on hover */
+    }
 
+</style>
 
+<div>
+    <h1>Welcome to JP Gym</h1>
+    <p>Your fitness, our passion!</p>
+</div>
+<div class= "container">
+    <div class="row mt-2 d-flex justify-content-center algin-item-center">
+    <div class="col-md-6">
+      <p>
+        JP Gym is not just a place to work out; it’s a community where we support each other to achieve personal fitness goals. With our modern facilities, expert trainers, and personalized workout plans, we make sure every member gets the best fitness experience. Located in Bangalore, we offer a welcoming environment that motivates you to push beyond your limits.
+      </p>
+      <div class="arrow-down"></div>
+    </div>
+    </div>
+  </div>
 {% endblock head %}
+<!-- Hero Section -->
 
+{% block body %}
+<!-- About Section -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+        {% for img in gym_images %}
+        
+            <img src="{{ img.image.url }}" alt="{{ img.title }}" class="img-fluid rounded" style="height: 300px; object-fit: cover;">
+            <p>{{ img.description }}</p>
+        
+        {% endfor %}
+        </div>
+        <div class="col-md-6">
+            {% for address in gym_address %}
+            <h2>About JP Gym</h2>
+            <p>{{address.title_des}}</p>
+            <address>
+                {{address.address|linebreaks}}
+                
+            </address>
+            <p>
+                {{address.description}}
+               
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Facilities Section -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Our Facilities</h2>
+    <div class="row">
+        {% for facility in facilities %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ facility.image.url }}" class="card-img-top" alt="{{ facilities.title }}" style="height: 300px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ facility.title }}</h5>
+                    <p class="card-text">{{ facility.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div class="container my-5 text-center">
+    <h2>Contact Us</h2>
+    <p>For inquiries, memberships, or more information, feel free to reach out to us at:</p>
+    {% for contact in contacts %}
+    <p><strong>Email:</strong> {{ contact.email }}</p>
+    <p><strong>Phone:</strong> {{ contact.phone }}</p>
+    {% endfor %}
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3">
+    <p>© 2025 JP Gym. All Rights Reserved. | Designed with 💪 in Bangalore.</p>
+</footer>
+
+{% endblock body %}
