@@ -2,6 +2,17 @@
 
 The JP Gym Management System is a web-based application built using Django that helps gym owners manage their daily operations. It includes features such as member enrollment, workout attendance tracking, trainer assignments, and more. The system allows gym members to register, select membership plans, track attendance, and interact with trainers. Admins can manage all gym data via an intuitive admin panel.
 
+
+
+### Live Website
+![Demo](https://jitendrapra.pythonanywhere.com/)
+
+
+## 🖼️ Sample Screenshot
+![Game Screenshot](./sample/img1.png)
+![Game Screenshot](./sample/img2.png)
+![Game Screenshot](./sample/img3.png)
+
 ## Features
 
 ### 1. **User Authentication**
