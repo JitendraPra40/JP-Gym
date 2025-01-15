@@ -5,7 +5,7 @@ The JP Gym Management System is a web-based application built using Django that 
 
 
 ## Live Website
-[Link](https://jitendrapra.pythonanywhere.com/)
+<a href="https://jitendrapra.pythonanywhere.com/" target="_blank">Visit My Website</a>
 
 
 ## 🖼️ Sample Screenshot
